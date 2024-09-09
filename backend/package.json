@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "build": "tsc && copy package.json dist\\ && copy .env dist\\ && cd dist && npm i --omit=dev && del package.json && del package-lock.json",
+    "dev": "nodemon --exec node --no-warnings --loader ts-node/esm ./app.ts",
+    "docker": "docker-compose up -d",
+    "builddocker": "tsc && cp package.json dist\\ && cp .env dist\\ && cd dist && npm i --omit=dev && rm -f package.json && rm -f package-lock.json"
+  },
+  "keywords": [],
+  "author": "Joel Sánchez",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.4",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

@@ -1,0 +1,19 @@
+services:
+  frontendapptest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: appfrontend:1.0.0
+    networks:
+      - app-network
+    container_name: Testappfrontend
+    restart: always
+    ports:
+      - "${VITE_APP_PORT}:80"
+    environment:
+      VITE_APP_PORT: ${VITE_APP_PORT}
+      VITE_APP_HOST: ${VITE_APP_HOST}
+      VITE_API_URL: ${VITE_API_URL}
+networks:
+  app-network:
+    driver: bridge

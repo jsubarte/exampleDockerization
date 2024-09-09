@@ -1,0 +1,21 @@
+services:
+  backendapptest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: appbackend:1.0.0
+    networks:
+      - app-network
+    container_name: Testappbackend
+    restart: always
+    #ports:
+    #  - "${PORT}:${PORT}"
+    expose:
+      - "${PORT}"
+    environment:
+      PORT: ${PORT}
+      HOSTNAME: ${DOCKERHOSTNAME}
+      HOSTFRONT: ${HOSTFRONT}
+networks:
+  app-network:
+    driver: bridge

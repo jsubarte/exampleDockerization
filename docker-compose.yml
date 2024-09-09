@@ -1,0 +1,32 @@
+services:
+  backendapptest:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    image: appbackend:1.0.0
+    networks:
+      - app-network
+    container_name: Testappbackend
+    restart: always
+    expose:
+      - "5174"
+  frontendapptest:
+    depends_on: 
+      - backendapptest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
+    image: appfrontend:1.0.0
+    networks:
+      - app-network
+    container_name: Testappfrontend
+    restart: always
+    ports:
+      - "5175:80"
+networks:
+  app-network:
+    driver: bridge
