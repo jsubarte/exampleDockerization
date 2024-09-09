@@ -11,13 +11,15 @@ class Server {
     private hostname: string
     private hostfront: string
     private port: string
+    private portfront: string
     private paths: Routes
 
     constructor(){
         this.app = express()
-        this.port = process.env.PORT || '5174'
+        this.port = process.env.HOSTPORT || '5174'
         this.hostname = process.env.HOSTNAME || 'backendapptest'
         this.hostfront = process.env.HOSTFRONT || 'desktop-4a3f1kt'
+        this.portfront = process.env.PORTFRONT || '5175'
         this.paths = {
             test: '/api/v1/test'
         }
@@ -29,7 +31,7 @@ class Server {
 
     private middlewares(){
         const corsOptions: CorsOptions = {
-            origin: `http://${this.hostfront}:${parseInt(this.port) + 1}`,
+            origin: `http://${this.hostfront}:${this.portfront}`,
             methods: 'GET, POST, PUT, PATCH, DELETE',
             allowedHeaders: [ 'Content-Type', 'Authorization' ]
         }

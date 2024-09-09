@@ -7,7 +7,7 @@ export default defineConfig(( { mode } ) => {
   return {
     plugins: [react()],
     server:{
-      host: env.VITE_APP_HOST || 'localhost',
+      host: env.VITE_SERVER_NAME || 'desktop-4a3f1kt',
       port: Number(env.VITE_APP_PORT || 5175),
       strictPort: true
     }
