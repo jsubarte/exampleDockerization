@@ -1,6 +1,7 @@
 import express, { Application } from 'express'
 import cors, { CorsOptions } from 'cors'
 import { rtrTest } from '../routes'
+import { testConnection } from '../database/config'
 
 interface Routes {
     test: string
@@ -48,6 +49,7 @@ class Server {
         this.app.listen( parseInt(this.port), this.hostname, () => {
             try {
                 console.log(`Aplicacion ejecutandose en ${ this.hostname } en el puerto ${ this.port }`)
+                testConnection()
             } catch (error) {
                 console.error(`Error listen: ${ error }`)
             }
