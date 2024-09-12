@@ -9,7 +9,7 @@ interface IPlanet {
     nombre: string
     tipoID: number
     diametroKm: number
-    masaKm: number
+    masaKg: number
     distanciaSolKm: number
 }
 
