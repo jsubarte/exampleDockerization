@@ -15,17 +15,18 @@ export const planetSlice = createSlice({
     reducers: {
         // Todas estas funciones deben ser sincronas
         addPlanetData: ( state, { payload = {} } ) => {
-            const planetApi = payload.data
-            const planeta = {
-                id: planetApi.id,
-                nombre: planetApi.nombre,
-                tipoID: planetApi.tipoID,
-                diametroKm: planetApi.diametroKm,
-                masaKm: planetApi.masaKm,
-                distanciaSolKm: planetApi.distanciaSolKm
+            for ( const data of payload.data ) {
+                const planeta = {
+                    id: data.id,
+                    nombre: data.nombre,
+                    tipoID: data.tipoID,
+                    diametroKm: data.diametroKm,
+                    masaKm: data.masaKm,
+                    distanciaSolKm: data.distanciaSolKm
+                }
+                const exist = state.listPlanet.some(e => e.id === planeta.id)
+                !exist && state.listPlanet.push(planeta)
             }
-            const exist = state.listPlanet.some(e => e.id === planeta.id)
-            !exist && state.listPlanet.push(planeta)
         }
     }
 })
