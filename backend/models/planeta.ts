@@ -42,6 +42,7 @@ Planeta.init(
     }
   },{
     sequelize: dbConnection,
+    timestamps: false,
     modelName: 'Planeta',
     tableName: 'Planetas'
   }

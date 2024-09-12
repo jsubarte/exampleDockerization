@@ -42,6 +42,7 @@ Luna.init(
     }
   },{
     sequelize: dbConnection,
+    timestamps: false,
     modelName: 'Luna',
     tableName: 'Lunas'
   }

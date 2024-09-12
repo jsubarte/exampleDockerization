@@ -19,6 +19,7 @@ TipoPlaneta.init(
     }
   },{
     sequelize: dbConnection,
+    timestamps: false,
     modelName: 'TipoPlaneta',
     tableName: 'TipoPlanetas'
   }

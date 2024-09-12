@@ -1,10 +1,13 @@
 import express, { Application } from 'express'
 import cors, { CorsOptions } from 'cors'
-import { rtrTest } from '../routes'
+import { rtrLuna, rtrPlaneta, rtrTest, rtrTipoPlaneta } from '../routes'
 import { testConnection } from '../database/config'
 
 interface Routes {
+    luna: string
+    planeta: string
     test: string
+    tipoplaneta: string
 }
 
 class Server {
@@ -12,17 +15,18 @@ class Server {
     private hostname: string
     private hostfront: string
     private port: string
-    private portfront: string
     private paths: Routes
 
     constructor(){
         this.app = express()
         this.port = process.env.HOSTPORT || '5174'
         this.hostname = process.env.HOSTNAME || 'backendapptest'
-        this.hostfront = process.env.HOSTFRONT || 'desktop-4a3f1kt'
-        this.portfront = process.env.PORTFRONT || '5175'
+        this.hostfront = process.env.HOSTFRONT || 'http://desktop-4a3f1kt:5175'
         this.paths = {
-            test: '/api/v1/test'
+            luna: '/api/v1/luna',
+            planeta: '/api/v1/planeta',
+            test: '/api/v1/test',
+            tipoplaneta: '/api/v1/tipoplaneta'
         }
 
         this.middlewares()
@@ -32,7 +36,7 @@ class Server {
 
     private middlewares(){
         const corsOptions: CorsOptions = {
-            origin: `http://${this.hostfront}:${this.portfront}`,
+            origin: `${this.hostfront}`,
             methods: 'GET, POST, PUT, PATCH, DELETE',
             allowedHeaders: [ 'Content-Type', 'Authorization' ]
         }
@@ -42,7 +46,10 @@ class Server {
     }
 
     private routes(){
+        this.app.use(this.paths.luna, rtrLuna)
+        this.app.use(this.paths.planeta, rtrPlaneta)
         this.app.use(this.paths.test, rtrTest)
+        this.app.use(this.paths.tipoplaneta, rtrTipoPlaneta)
     }
 
     public listen(){
