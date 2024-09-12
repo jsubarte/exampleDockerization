@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { dataSlice } from './'
+import { dataSlice, planetSlice } from './'
+
 
 export const store = configureStore({
     reducer: {
-        data: dataSlice.reducer
+        data: dataSlice.reducer,
+        planet: planetSlice.reducer
     }
 })
 

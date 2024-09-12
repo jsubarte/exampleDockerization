@@ -1,28 +1,52 @@
 import { useEffect } from 'react'
-import { useAppSelector, useGetDataStore } from '../../hooks'
-import { Col, Row } from 'react-bootstrap'
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import { useAppSelector, usePlanetasStore } from '../../hooks'
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 
 export const GetData = () => {
-    const { getDataTest } = useGetDataStore()
-    const { listData } = useAppSelector( state => state.data )
+    const { getPlanetData } = usePlanetasStore()
+    const { listPlanet } = useAppSelector( state => state.planet )
 
     useEffect(() => {
         document.body.style.backgroundColor = 'var(--bs-light)'
-        getDataTest()
+        getPlanetData()
     }, [])
     
     return (
         <>
             {
-                listData.message.length > 0
-                ? (
-                    <Row>
-                        <Col className='col-4'>Exito: { listData.success ? 'True' : 'False' }</Col>
-                        <Col className='col-4'>Mensaje: { listData.message }</Col>
-                        <Col className='col-4'>Datos: Sin datos</Col>
-                    </Row>
-                )
+                listPlanet.length > 0
+                ?   <Table>
+                        <Thead>
+                            <Tr>
+                                {
+                                    Object.keys(listPlanet[0]).map(
+                                        keyData => (
+                                            <Th key={ keyData }>{ keyData }</Th>
+                                        )
+                                    )
+                                }
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {
+                                listPlanet.map( 
+                                    planet => (
+                                        <Tr key={ planet.id }>
+                                            {
+                                                Object.values(planet).map(
+                                                    ( val, subId ) => (
+                                                        <Td key={ subId }>{ val }</Td>
+                                                    )
+                                                )
+                                            }
+                                        </Tr>
+                                    )
+                                )
+                            }
+                        </Tbody>
+                    </Table>
                 : (<h1>Loading....</h1>)
             }
         </>

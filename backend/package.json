@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "app.ts",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node ./dist/app.js",
     "build": "tsc && copy package.json dist\\ && copy .env dist\\ && cd dist && npm i --omit=dev && del package.json && del package-lock.json",

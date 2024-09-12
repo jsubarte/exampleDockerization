@@ -4,6 +4,16 @@ interface IData {
     data: null
 }
 
+interface IPlanet {
+    id: number
+    nombre: string
+    tipoID: number
+    diametroKm: number
+    masaKm: number
+    distanciaSolKm: number
+}
+
 export type {
-    IData
+    IData,
+    IPlanet
 }
